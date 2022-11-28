@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'mlb-speed';
+  position = 'cf';
+  stat1 = 'oaa';
+  stat2 = 'sprint_speed';
 }

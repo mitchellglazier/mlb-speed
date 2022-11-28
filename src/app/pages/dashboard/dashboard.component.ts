@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { MatTableDataSource } from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,38 +9,65 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['first_name', 'last_name', 'team', 'sprint_speed', 'oaa'];
+  @Input() position: any;
+  @Input() stat1: any = ''
+  @Input() stat2: any = ''
+  displayedColumns: string[] = ['first_name', 'last_name', 'team'];
   graphArray!: MatTableDataSource<any>;
   graphData: any;
-  sprintAverage!: string;
-  outAverage!: number;
+  stat1Average!: string;
+  stat2Average!: number;
+  showData = false;
+  stat1CSV!: string;
+  stat2CSV!: string;
+  resultsLength!: number;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get('assets/outs_above_average.csv', {responseType: 'text'})
+    this.displayedColumns.push(this.stat1)
+    this.displayedColumns.push(this.stat2)
+    if (this.position && this.stat1 && this.stat1) {
+      this.showData = true;
+    }
+    switch (this.stat1) {
+      case 'sprint_speed': 
+      this.stat1CSV = 'assets/sprint_speed.csv'
+      break;
+      case 'oaa': 
+      this.stat1CSV = 'assets/outs_above_average.csv'
+    }
+    switch (this.stat2) {
+      case 'sprint_speed': 
+      this.stat2CSV = 'assets/sprint_speed.csv'
+      break;
+      case 'oaa': 
+      this.stat2CSV = 'assets/outs_above_average.csv'
+    }
+    this.http.get(this.stat1CSV, {responseType: 'text'})
     .subscribe(
         data => {
-          let OAAArray = this.csvToJSON(data)
-          this.http.get('assets/sprint_speed.csv', {responseType: 'text'})
+          let stat1Array = this.csvToJSON(data)
+          this.http.get(this.stat2CSV, {responseType: 'text'})
           .subscribe(
             data => {
-          let speedArray = this.csvToJSON(data);
-          let tempArray = speedArray.filter((el) => {
-            return OAAArray.some((p) => {
+          let stat2Array = this.csvToJSON(data);
+          let tempArray = stat2Array.filter((el) => {
+            return stat1Array.some((p) => {
               return p.player_id === el.player_id
             })
           })
           tempArray.map((player:any) => {
-            OAAArray.map((sp:any) => {
+            stat1Array.map((sp:any) => {
               if (player.player_id === sp.player_id) {
                 player.oaa = sp.outs_above_average
               }
             })
           })
           this.graphData = tempArray;
-          this.sprintAverage = (tempArray.reduce((total, next) => total + parseInt(next.sprint_speed), 0) / tempArray.length).toFixed(2);
-          this.outAverage = Math.round(tempArray.reduce((total, next) => total + parseInt(next.oaa), 0) / tempArray.length);
+          this.resultsLength = tempArray.length
           this.graphArray = new MatTableDataSource(tempArray);
         }
     );

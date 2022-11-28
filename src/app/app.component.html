@@ -1,5 +1,34 @@
-<mat-toolbar color="warn">
-  <span>Angels Baseball</span>
-</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav class="side" mode="side" opened>
+    <h1>Angels Baseball</h1>
+    <mat-divider></mat-divider>
+<mat-form-field>
+  <mat-label>Position</mat-label>
+  <mat-select [(value)]="position">
+    <mat-option value="cf">CF</mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+<mat-form-field>
+  <mat-label>Statistic #1</mat-label>
+  <mat-select [(value)]="stat1">
+    <mat-option value="sprint_speed">Sprint Speed</mat-option>
+    <mat-option value="oaa">OAA</mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+<mat-form-field>
+  <mat-label>Statistic #2</mat-label>
+  <mat-select [(value)]="stat2">
+    <mat-option value="oaa">OAA</mat-option>
+    <mat-option value="sprint_speed">Sprint Speed</mat-option>
+  </mat-select>
+</mat-form-field>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="toolbar"></mat-toolbar>
+    <app-dashboard [position]="position" [stat1]="stat1" [stat2]="stat2"></app-dashboard>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
-<router-outlet></router-outlet>
+

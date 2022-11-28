@@ -10,8 +10,8 @@ export class ScatterComponent implements OnInit {
   @Input() graphData: any;
   private svg: any;
   private margin = 50;
-  private width = 750 - (this.margin * 2);
-  private height = 400 - (this.margin * 2);
+  private width = 900 - (this.margin * 2);
+  private height = 650 - (this.margin * 2);
 
   constructor() { }
 
@@ -39,7 +39,7 @@ private drawPlot(): void {
   .range([ 0, this.width ]);
   this.svg.append("g")
   .attr("transform", "translate(0," + this.height + ")")
-  .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+  .call(d3.axisBottom(x));
 
   // Add Y axis
   const y = d3.scaleLinear()
@@ -65,8 +65,8 @@ private drawPlot(): void {
   .attr("cx", (d: any) => x(d.sprint_speed))
   .attr("cy", (d: any) => y(d.oaa))
   .attr("r", 7)
-  .style("opacity", .5)
-  .style("fill", "#69b3a2")
+  .style("opacity", 1)
+  .style("fill", "#862633")
 
   // Add labels
   dots.selectAll("text")
@@ -76,6 +76,8 @@ private drawPlot(): void {
   .text((d: any) => (d.name))
   .attr("x", (d: any) => x(d.sprint_speed))
   .attr("y", (d: any) => y(d.oaa))
+  .style("fill", '#C4CED4')
+  .style("font", "10px times")
 }
 
 }
