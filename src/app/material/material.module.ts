@@ -7,6 +7,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -20,7 +21,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSidenavModule,
     MatDividerModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ],
   exports: [
     MatToolbarModule,
@@ -29,7 +31,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSidenavModule,
     MatDividerModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

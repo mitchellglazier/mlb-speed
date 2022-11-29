@@ -15,8 +15,8 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['first_name', 'last_name', 'team'];
   graphArray!: MatTableDataSource<any>;
   graphData: any;
-  stat1Average!: string;
-  stat2Average!: number;
+  stat1Average!: any;
+  stat2Average!: any;
   showData = false;
   stat1CSV!: string;
   stat2CSV!: string;
@@ -67,6 +67,8 @@ export class DashboardComponent implements OnInit {
             })
           })
           this.graphData = tempArray;
+          this.stat1Average = (tempArray.reduce((total, next) => total + parseInt(next.oaa), 0) / tempArray.length).toFixed(2);
+          this.stat2Average = (tempArray.reduce((total, next) => total + parseInt(next.sprint_speed), 0) / tempArray.length).toFixed(2);
           this.resultsLength = tempArray.length
           this.graphArray = new MatTableDataSource(tempArray);
         }

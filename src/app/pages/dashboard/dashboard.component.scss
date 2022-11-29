@@ -5,7 +5,13 @@
 .content {
     display: flex;
     flex-direction: row;
-    height: 100%
+    margin: 10px;
+    width: 100%;
+}
+
+mat-card {
+  width: 75%;
+  margin-right: 50px;
 }
   
   table {
