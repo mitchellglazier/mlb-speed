@@ -10,8 +10,8 @@ export class ScatterComponent implements OnInit {
   @Input() graphData: any;
   private svg: any;
   private margin = 50;
-  private width = 900 - (this.margin * 2);
-  private height = 650 - (this.margin * 2);
+  private width = 600 - (this.margin * 2);
+  private height = 450 - (this.margin * 2);
 
   constructor() { }
 
