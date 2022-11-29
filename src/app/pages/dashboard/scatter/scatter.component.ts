@@ -26,8 +26,7 @@ export class ScatterComponent implements OnInit {
   private createSvg(): void {
     this.svg = d3.select("figure#scatter")
     .append("svg")
-    .attr("width", this.width + (this.margin * 2))
-    .attr("height", this.height + (this.margin * 2))
+    .attr("viewBox", `0 0 600 1200`)
     .append("g")
     .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
 }
