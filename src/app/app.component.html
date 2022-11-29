@@ -4,14 +4,14 @@
     <mat-divider></mat-divider>
 <mat-form-field>
   <mat-label>Position</mat-label>
-  <mat-select [(value)]="position">
+  <mat-select disabled [(value)]="position">
     <mat-option value="cf">CF</mat-option>
   </mat-select>
 </mat-form-field>
 <br>
 <mat-form-field>
   <mat-label>Statistic #1</mat-label>
-  <mat-select [(value)]="stat1">
+  <mat-select disabled [(value)]="stat1">
     <mat-option value="sprint_speed">Sprint Speed</mat-option>
     <mat-option value="oaa">OAA</mat-option>
   </mat-select>
@@ -19,7 +19,7 @@
 <br>
 <mat-form-field>
   <mat-label>Statistic #2</mat-label>
-  <mat-select [(value)]="stat2">
+  <mat-select disabled [(value)]="stat2">
     <mat-option value="oaa">OAA</mat-option>
     <mat-option value="sprint_speed">Sprint Speed</mat-option>
   </mat-select>
